@@ -8,4 +8,8 @@ public class WordMeaningNode {
         this.word = word;
         this.next = null;
     }
+
+    public WordMeaning getWord(){
+        return this.word;
+    }
 }

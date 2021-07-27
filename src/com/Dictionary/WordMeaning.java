@@ -1,16 +1,16 @@
 package com.Dictionary;
 
 public class WordMeaning {
-    private String word = "";
+    private String wordName = "";
     private String meaning = "";
 
     public WordMeaning(String word, String meaning){
-        this.word = word;
+        this.wordName = word;
         this.meaning = meaning;
     }
 
-    public String getWord(){
-        return this.word;
+    public String getWordName(){
+        return this.wordName;
     }
 
     public String getMeaning(){
