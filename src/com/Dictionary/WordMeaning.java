@@ -16,4 +16,8 @@ public class WordMeaning {
     public String getMeaning(){
         return this.meaning;
     }
+
+    public void addMeaning(String meaning){
+        this.meaning += meaning;
+    }
 }
