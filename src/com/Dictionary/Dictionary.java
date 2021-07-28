@@ -1,32 +1,15 @@
 package com.Dictionary;
 
+import javax.swing.*;
+
 public class Dictionary {
 
     public static void main(String[] args) {
-//        String word = "waiting";
-//        String definition = "let time pass";
-//
-//        WordList wordList = new WordList();
-//
-//        wordList.insert( new WordMeaning(word,definition));
-//
-//        System.out.println(wordList.toString());
-//
-//        String newWord = "Love";
-//        String newMeaning = "care for someone";
-//
-//
-//        wordList.insert( new WordMeaning(newWord,newMeaning));
-//
-//        System.out.println(wordList.toString());
-
-//        wordList.remove("vacation");
-//        System.out.println(wordList.toString());
-//        wordList.update("Love","world of warcraft");
-//        System.out.println(wordList.toString());
         WordList dictionary = new WordList();
         WordList deletedWords = new WordList();
-
+        String word = "";
+        String meaning = "";
+        boolean done = false;
 
         String menu = "1. Add a word to the dictionary\n" +
                     "2. Update a word's meaning\n" +
@@ -35,7 +18,49 @@ public class Dictionary {
                     "5. View deleted words\n" +
                     "6. Quit";
 
-        int choice = GetData.getInt(menu);
+            while(!done){
+                int choice = GetData.getInt(menu);
 
+                switch (choice){
+                    case 1:
+                        word = GetData.getString("Insert the new word");
+                        meaning = GetData.getString("Insert the word's meaning");
+                        dictionary.insert(new WordMeaning(word,meaning));
+                        break;
+                    case 2:
+                        word = GetData.getString("What word would you like to upgrade?");
+                        meaning = GetData.getString("What meaning would you like to add to the word?");
+                        dictionary.update(word,meaning);
+                        break;
+                    case 3:
+                        word = GetData.getString("What word would you like to delete");
+                        dictionary.remove(word);
+                        if(dictionary.wasDeleted()){
+                            deletedWords.insert(dictionary.getDeletedWord());
+                        }
+                        break;
+                    case 4:
+                        JTextArea text = new JTextArea(dictionary.toString(), 10, 50);
+                        JScrollPane pane = new JScrollPane(text);
+                        JOptionPane.showMessageDialog(null,pane,"Dictionary",JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    case 5:
+                        text = new JTextArea(deletedWords.deletedWords(), 10, 50);
+                        pane = new JScrollPane(text);
+                        JOptionPane.showMessageDialog(null,pane,"Dictionary",JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    case 6:
+                        done = true;
+                        break;
+                    default:
+                        display("That option is not defined, please selected an option from 1 to 6");
+                        break;
+                }
+            }
+
+    }
+
+    public static void display(String s){
+        JOptionPane.showMessageDialog(null,s,"Error",JOptionPane.ERROR_MESSAGE);
     }
 }
